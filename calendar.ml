@@ -203,7 +203,9 @@ let getLectureDates d1 d2 lec =
   let f lst =
     List.filter (fun (_, wd) -> List.mem wd lec) lst
   in
-  f(weekdayMap(dateRange d1 d2))
+    let dr (d1', d2') = (dateRange d1 d2)
+    in
+  (dr |> weekdayMap |> f) (d1, d2)
 
 (* TEST CASES *)
 

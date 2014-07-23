@@ -216,10 +216,11 @@ let printDateList l =
       in
         (print_string (s ^ "\n"))
 
-
-let test1 () =
-  let l = (getLectureDates (2, January, 2014) (30, May, 2014) [Monday; Friday])
+let test () =
+  let l1 = (getLectureDates (2, January, 2014) (30, May, 2014) [Monday; Friday])
+  and l2 = (getLectureDates (4, August, 2014) (13, December, 2014) [Monday; Wednesday])
   in
-  printDateList l
+  printDateList l1; print_string "\n\n";
+  printDateList l2; print_string "\n\n"
 
-let _ = test1()
+let _ = test()

@@ -109,9 +109,6 @@ let string_of_month = function
 let string_of_date (d, m, y) =
   (string_of_month m) ^ " " ^ (string_of_int d) ^ ", " ^ (string_of_int y)
 
-let string_of_date_weekday (d, wd) =
-  (string_of_date d) ^ ", " ^ (string_of_weekday wd)
-
 (*
   Given a date, return its next date.
   Example:
@@ -187,40 +184,17 @@ let getWeekDay d =
       in
         countWeekDays refWeekDay deltaWeekDay
 
-let dateRange d1 d2 =
+(*
+  Given two dates d1 and d2, return the list of all dates from d1 to d2, d1 and d2 included.
+  Example:
+    (1, January, 2014) (5, January, 2014) -->
+      [(1, January, 2014); (2, January, 2014); (3, January, 2014);
+       (4, January, 2014); (5, January, 2014)]
+*)
+let rec dateRange d1 d2 =
   let rec iter d1' d2' range =
-    if (d1' = d2') then range
+    if (isLater d1' d2') then (dateRange d2' d1')
+    else if (d1' = d2') then (d2' :: range)
     else (iter (nextDate d1') d2' (d1' :: range))
   in
   (List.rev (iter d1 d2 []))
-
-let weekdayMap lst =
-  List.map (fun d -> (d, (getWeekDay d))) lst
-
-let (|>) f g x = g(f x)
-
-let getLectureDates d1 d2 lec =
-  let f lst =
-    List.filter (fun (_, wd) -> List.mem wd lec) lst
-  in
-    let dr (d1', d2') = (dateRange d1 d2)
-    in
-  (dr |> weekdayMap |> f) (d1, d2)
-
-(* TEST CASES *)
-
-let printDateList l =
-    let slist = List.map string_of_date_weekday l
-    in
-      let s = (List.fold_left (fun s1 s2 -> (s1 ^ "\n" ^ s2)) "" slist)
-      in
-        (print_string (s ^ "\n"))
-
-let test () =
-  let l1 = (getLectureDates (2, January, 2014) (30, May, 2014) [Monday; Friday])
-  and l2 = (getLectureDates (4, August, 2014) (13, December, 2014) [Monday; Wednesday])
-  in
-  printDateList l1; print_string "\n\n";
-  printDateList l2; print_string "\n\n"
-
-let _ = test()

@@ -1,8 +1,8 @@
 Required:
 Ocaml compiler for compilation.
 
-Compiling the program:
-ocamlc calendar.ml -o calendar
+Compiling the program along with the lecture example:
+make
 
-Running the program
-./calendar
+Running the lecture example program
+./lecture

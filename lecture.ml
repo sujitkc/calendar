@@ -32,14 +32,9 @@ let getLectureDates d1 d2 lec =
     in
   (dr |> weekdayMap |> f) (d1, d2)
 
-
 (* TEST CASES *)
 let printDateList l =
-    let slist = List.map string_of_date_weekday l
-    in
-      let s = (List.fold_left (fun s1 s2 -> (s1 ^ "\n" ^ s2)) "" slist)
-      in
-        (print_string (s ^ "\n"))
+    List.iter (fun s -> (print_string (string_of_date_weekday s ^ "\n"))) l
 
 let test () =
   let l1 = (getLectureDates (2, Calendar.January, 2014) (30, Calendar.May, 2014) [Calendar.Monday; Calendar.Friday])

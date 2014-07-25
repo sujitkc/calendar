@@ -24,6 +24,19 @@ let weekdayMap lst =
 
 let (|>) f g x = g(f x)
 
+(*
+  Given two dates d1 and d2, and a list lec of weekdays on which the lectures are 
+  to be held, return the list of pairs (date, weekday) for each lecture day.
+  Example:
+    getLectureDates
+      (2, Calendar.January, 2014)
+      (15, Calendar.January, 2014)
+      [Calendar.Monday; Calendar.Friday];;
+    --> [((2, Calendar.January, 2014), Calendar.Friday);
+      ((6, Calendar.January, 2014), Calendar.Monday);
+      ((9, Calendar.January, 2014), Calendar.Friday);
+      ((13, Calendar.January, 2014), Calendar.Monday)] 
+*)
 let getLectureDates d1 d2 lec =
   let f lst =
     List.filter (fun (_, wd) -> List.mem wd lec) lst

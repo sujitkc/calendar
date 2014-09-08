@@ -129,8 +129,8 @@ let nextDate (d, m, y) =
 (*
   Given two dates dd1 and dd2, return true if dd1 is strictly later than dd2
   Example:
-    (1, January, 2014) (1, January, 2014) --> false
-    (1, January, 2014) (2, January, 2014) --> false
+    (1, January, 2014) (1, January, 2014)   --> false
+    (1, January, 2014) (2, January, 2014)   --> false
     (1, January, 2014) (31, December, 2013) --> false
 *)
 let isLater (d1, m1, y1) (d2, m2, y2) =
@@ -148,18 +148,18 @@ let isLater (d1, m1, y1) (d2, m2, y2) =
   Example:
     (1, January, 2014) (1, January, 2014) --> 0
     (1, January, 2014) (2, January, 2014) --> 1
-    (1, January, 2014) (31, December, 2013) --> 1
+    (1, January, 2014) (31, December, 2013) --> -1
 *)
 let rec daysInBetween d1 d2 =
   let rec iter d1 d2 n =
-    if (isLater d1 d2) then
-      (daysInBetween d2 d1)
-    else if d1 = d2 then
+    if d1 = d2 then
       n
     else
       (iter (nextDate d1) d2 (n + 1))
   in
-  (iter d1 d2 0)
+    if (isLater d1 d2) then
+      -(daysInBetween d2 d1)
+    else (iter d1 d2 0)
 
 (*
   Given a weekday wd and a number n, return the weekday of the date

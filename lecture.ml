@@ -50,10 +50,16 @@ let printDateList l =
     List.iter (fun s -> (print_string (string_of_date_weekday s ^ "\n"))) l
 
 let test () =
-  let l1 = (getLectureDates (2, Calendar.January, 2014) (30, Calendar.May, 2014) [Calendar.Monday; Calendar.Friday])
+  let 
+  (* l1 = (getLectureDates (2, Calendar.January, 2014) (30, Calendar.May, 2014) [Calendar.Monday; Calendar.Friday])
   and l2 = (getLectureDates (4, Calendar.August, 2014) (13, Calendar.December, 2014) [Calendar.Monday; Calendar.Wednesday])
+  and *)
+  l3 = (getLectureDates (4, Calendar.August, 2014) (13, Calendar.December, 2014) [Calendar.Thursday])
   in
+(*
   printDateList l1; print_string "\n\n";
-  printDateList l2; print_string "\n\n"
+  printDateList l2; print_string "\n\n";
+*)
+  printDateList l3; print_string "\n\n"
 
 let _ = test()

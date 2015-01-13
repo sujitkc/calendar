@@ -63,9 +63,12 @@ def printLecturePlan(lp):
         ((27, August, 2014), Wednesday)
       ]
 '''
-def getLecturePlan(d1, d2, wdays):
+def getLecturePlanWithHolidays(d1, d2, wdays, holidays):
   lst = [(d, getWeekDay(d)) for d in dateRange(d1, d2)]
-  return [(d, wd) for (d, wd) in lst if wd in wdays]
+  return [(d, wd) for (d, wd) in lst if wd in wdays and d not in holidays]
+
+def getLecturePlan(d1, d2, wdays):
+  return getLecturePlanWithHolidays(d1, d2, wdays, [])
 
 def t1():
   printLecturePlan(getLecturePlan((4, August, 2014), (31, August, 2014), [Monday, Wednesday]))
@@ -73,5 +76,12 @@ def t1():
 def t2():
   printLecturePlan(getLecturePlan((4, August, 2014), (13, December, 2014), [Monday, Wednesday]))
 
+def t3():
+  printLecturePlan(getLecturePlanWithHolidays((4, August, 2014), (31, August, 2014), [Monday, Wednesday], [(20, August, 2014), (25, August, 2014)]))
+
+def t4():
+  printLecturePlanWithHolidays(getLecturePlanWithHolidays((4, August, 2014), (13, December, 2014), [Monday, Wednesday]))
+
 if __name__ == "__main__":
   t1()
+  t3()

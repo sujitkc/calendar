@@ -41,7 +41,7 @@ let getLectureDates d1 d2 lec =
   let f lst =
     List.filter (fun (_, wd) -> List.mem wd lec) lst
   in
-    let dr (d1', d2') = (Calendar.dateRange d1 d2)
+    let dr (d1', d2') = (Calendar.dateRange d1' d2')
     in
   (dr |> weekdayMap |> f) (d1, d2)
 
@@ -54,7 +54,7 @@ let test () =
   (* l1 = (getLectureDates (2, Calendar.January, 2014) (30, Calendar.May, 2014) [Calendar.Monday; Calendar.Friday])
   and l2 = (getLectureDates (4, Calendar.August, 2014) (13, Calendar.December, 2014) [Calendar.Monday; Calendar.Wednesday])
   and *)
-  l3 = (getLectureDates (4, Calendar.August, 2014) (13, Calendar.December, 2014) [Calendar.Thursday])
+  l3 = (getLectureDates (1, Calendar.January, 2015) (3, Calendar.May, 2015) [Calendar.Tuesday; Calendar.Thursday])
   in
 (*
   printDateList l1; print_string "\n\n";

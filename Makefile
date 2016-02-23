@@ -1,16 +1,57 @@
-lecture : lecture.cmo calendar.cmo
-	ocamlc -o lecture calendar.cmo lecture.cmo
+CC=ocamlc
+CSV=/home/sujit/My-Downloads/source/csv-1.3.3/src/
 
-lecture.cmo : lecture.ml calendar.cmi
-	ocamlc -c lecture.ml
+timetable : lecture.cmo calendar.cmo timetable.cmo
+	$(CC) -ccopt -L$(CSV) -o timetable str.cma $(CSV)csv.cmo calendar.cmo lecture.cmo timetable.cmo
 
-calendar.cmo : calendar.ml calendar.mli
-	ocamlc -c calendar.ml
+timetable.cmo : timetable.ml timetable.cmi lecture.cmo calendar.cmo
+	$(CC) -I $(CSV) -c timetable.ml
+
+timetable.cmi : timetable.mli calendar.cmi lecture.cmi
+	$(CC) -c timetable.mli
+
+lecture.cmo : lecture.ml lecture.cmi calendar.cmo
+	$(CC) -c lecture.ml
+
+lecture.cmi : lecture.mli calendar.cmi
+	$(CC) -c lecture.mli
+
+calendar.cmo : calendar.ml calendar.cmi
+	$(CC) -c calendar.ml
 
 calendar.cmi : calendar.mli
-	ocamlc -c calendar.mli
+	$(CC) -c calendar.mli
+
+test_tt : test_timetable.ml timetable.cmo
+	$(CC) -c test_timetable.ml
+	$(CC) -ccopt -L$(CSV) -o test_timetable str.cma $(CSV)csv.cmo calendar.cmo lecture.cmo timetable.cmo test_timetable.cmo
+
+test_ttparser : lexer.cmo ttparser.cmo test_ttparser.cmo calendar.cmo timetable.cmo
+	ocamlc -o $@ str.cma $(CSV)csv.cmo calendar.cmo lecture.cmo timetable.cmo lexer.cmo ttparser.cmo test_ttparser.cmo
+
+lexer.cmo : lexer.ml ttparser.cmi
+	ocamlc -c lexer.ml
+
+lexer.ml: ttparser.mli lexer.mll
+	ocamllex lexer.mll
+
+ttparser.cmi : ttparser.mli
+	ocamlc -c ttparser.mli
+
+ttparser.cmo : ttparser.ml
+	ocamlc -c ttparser.ml
+
+ttparser.mli : ttparser.mly calendar.cmi timetable.cmi
+	ocamlyacc ttparser.mly
+
+ttparser.ml : ttparser.mly
+	ocamlyacc ttparser.mly
+
+test_ttparser.cmo : test_ttparser.ml ttparser.cmi
+	ocamlc -c test_ttparser.ml
 
 clean:
-	rm lecture
-	rm *.cmo
-	rm *.cmi
+	rm *.cmo;
+	rm *.cmi;
+	rm lecture;
+	rm timetable

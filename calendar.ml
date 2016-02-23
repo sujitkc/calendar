@@ -1,3 +1,5 @@
+exception CalendarException of string
+
 type month =
     January
   | February
@@ -38,6 +40,16 @@ let prevWeekDay = function
   | Thursday  -> Wednesday
   | Friday    -> Thursday
   | Saturday  -> Friday
+
+let weekday_of_string = function
+    "Sunday"    -> Sunday
+  | "Monday"    -> Monday
+  | "Tuesday"   -> Tuesday
+  | "Wednesday" -> Wednesday
+  | "Thursday"  -> Thursday
+  | "Friday"    -> Friday
+  | "Saturday"  -> Saturday
+  | _           -> raise (CalendarException "invalid weekday string")
 
 let string_of_weekday = function
     Sunday    -> "Sunday"
@@ -106,7 +118,10 @@ let string_of_month = function
   | November  -> "November"
   | December  -> "December"
 
-let string_of_date (d, m, y) =
+type date = Date of int * month * int
+
+let string_of_date dt =
+  let Date(d, m, y) = dt in
   (string_of_month m) ^ " " ^ (string_of_int d) ^ ", " ^ (string_of_int y)
 
 (*
@@ -117,14 +132,15 @@ let string_of_date (d, m, y) =
     (28, February, 2013) --> (1, March, 2013)
     (28, February, 2012) --> (29, February, 2012)
 *)
-let nextDate (d, m, y) =
+let nextDate dt =
+  let Date(d, m, y) = dt in
   if d = (daysInMonth m y) then
     if(m = December) then
-      (1, January, y + 1)
+      Date(1, January, y + 1)
     else
-      (1, (nextMonth m), y)
+      Date(1, (nextMonth m), y)
   else
-    (d + 1, m, y)
+    Date(d + 1, m, y)
 
 (*
   Given two dates dd1 and dd2, return true if dd1 is strictly later than dd2
@@ -133,7 +149,8 @@ let nextDate (d, m, y) =
     (1, January, 2014) (2, January, 2014)   --> false
     (1, January, 2014) (31, December, 2013) --> false
 *)
-let isLater (d1, m1, y1) (d2, m2, y2) =
+let isLater dt1 dt2 =
+  let Date(d1, m1, y1) = dt1 and Date(d2, m2, y2) = dt2 in
   if y1 = y2 then
     if m1 = m2 then
       d1 > d2
@@ -174,8 +191,8 @@ let countWeekDays wd n =
   in
   aux wd n'
 
-let getWeekDay d =
-  let refDate = (21, July, 2014)
+let getWeekDay (d : date) =
+  let refDate = Date(21, July, 2014)
   and refWeekDay = Monday
   in
     let delta = daysInBetween refDate d

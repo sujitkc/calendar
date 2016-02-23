@@ -67,8 +67,62 @@ def getLecturePlanWithHolidays(d1, d2, wdays, holidays):
   lst = [(d, getWeekDay(d)) for d in dateRange(d1, d2)]
   return [(d, wd) for (d, wd) in lst if wd in wdays and d not in holidays]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def getLecturePlan(d1, d2, wdays):
   return getLecturePlanWithHolidays(d1, d2, wdays, [])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def t1():
   printLecturePlan(getLecturePlan((4, August, 2014), (31, August, 2014), [Monday, Wednesday]))

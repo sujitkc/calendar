@@ -34,7 +34,7 @@ let string_of_date_weekday (d, wd) =
 let string_of_calendarday = function
     Working(d) -> (Calendar.string_of_date d)
   | Holiday(d, msg) -> ("(" ^ (Calendar.string_of_date d) ^ ", " ^ msg ^ ")")
-  | Vacation(_, _, _) -> raise (LectureException "string_of_calendarday : This function shouldn't be called on Vacation(_) type constructor.")
+  | Vacation(s, e, msg) -> ("(" ^ (Calendar.string_of_date s) ^ " - " ^ (Calendar.string_of_date e) ^ ", " ^ msg ^ ")")
 
 let string_of_calendarday_weekday cd wd =
   ("(" ^ (string_of_calendarday cd) ^ ", " ^ Calendar.string_of_weekday wd ^ ")") 

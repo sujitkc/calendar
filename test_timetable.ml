@@ -183,9 +183,26 @@ let holidayList2015IIITB = [
 ]
 
 let test_tt1 () =
-  Timetable.mapCourseToWeekdays ttspr15
+  Timetable_impl.mapCourseToWeekdays ttspr15
 
 let test_readFacultyList () =
-  Timetable.readFacultyList "data/s2015/faculty.csv"
+  let fl = Timetable_impl.readFacultyList "data/s2015/faculty.csv"
+  in
+  Hashtbl.iter (fun fac en -> (print_string (fac ^ " --> " ^ (string_of_int en) ^ "\n"))) fl
+
+let test_readHolidayList () =
+  let hl = Timetable_impl.readHolidayList "data/s2015/holidays.csv"
+  and print_holiday_list hl = (List.iter (fun cd -> print_string ((Lecture.string_of_calendarday cd) ^ "\n")) hl)
+  in
+  print_holiday_list hl
+
+let test_readTimetable () =
+  let tt = Timetable_impl.readTimetable "data/s2015/timetable.csv" in
+  print_string (Timetable.string_of_timetable tt)
 
 let _ = test_readFacultyList ()
+(*
+let _ = test_readHolidayList ()
+let _ = print_string (string_of_timetable ttspr15)
+*)
+let _ = test_readTimetable ()

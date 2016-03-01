@@ -30,6 +30,7 @@ type date = Date of int * month * int
 val daysInMonth : month -> int -> int
 val nextMonth : month -> month
 val string_of_month : month -> string
+val month_of_string : string -> month
 
 val nextDate : date -> date
 val isLater : date -> date -> bool

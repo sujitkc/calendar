@@ -41,15 +41,30 @@ let prevWeekDay = function
   | Friday    -> Thursday
   | Saturday  -> Friday
 
-let weekday_of_string = function
-    "Sunday"    -> Sunday
-  | "Monday"    -> Monday
-  | "Tuesday"   -> Tuesday
-  | "Wednesday" -> Wednesday
-  | "Thursday"  -> Thursday
-  | "Friday"    -> Friday
-  | "Saturday"  -> Saturday
-  | _           -> raise (CalendarException "invalid weekday string")
+let weekday_of_string s =
+  match s with
+    "Sunday"
+  | "SUNDAY"
+  | "SUN"       -> Sunday
+  | "Monday"
+  | "MONDAY"
+  | "MON"       -> Monday
+  | "Tuesday"
+  | "TUESDAY"
+  | "TUE"       -> Tuesday
+  | "Wednesday"
+  | "WEDNESDAY"
+  | "WED"       -> Wednesday
+  | "Thursday"
+  | "THURSDAY"
+  | "THU"       -> Thursday
+  | "Friday"
+  | "FRIDAY"
+  | "FRI"       -> Friday
+  | "Saturday"
+  | "SATURDAY"
+  | "SAT"       -> Saturday
+  | _           -> raise (CalendarException ("invalid weekday string " ^ s))
 
 let string_of_weekday = function
     Sunday    -> "Sunday"
@@ -60,6 +75,22 @@ let string_of_weekday = function
   | Friday    -> "Friday"
   | Saturday  -> "Saturday"
 
+let month_of_string sm =
+  match sm with 
+    "January"   -> January
+  | "February"  -> February
+  | "March"     -> March
+  | "April"     -> April
+  | "May"       -> May
+  | "June"      -> June
+  | "July"      -> July
+  | "August"    -> August
+  | "September" -> September
+  | "October"   -> October
+  | "November"  -> November
+  | "December"  -> December
+  | _           -> raise (CalendarException ("parseMonth : Invalid month string '" ^ sm ^ "'"))
+ 
 (*
   Given a year y, return true if y is a leap year; false otherwise.
   Example:

@@ -10,6 +10,8 @@ type semester = {
 
 exception LectureException of string
 
+val string_of_calendarday : calendarday -> string
+
 val string_of_date_weekday : Calendar.date * Calendar.weekDay -> string
 
 val flattenCalendarDayList : calendarday list -> calendarday list

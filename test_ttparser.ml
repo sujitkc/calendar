@@ -10,7 +10,7 @@ let test_ttparser () =
     let slots =
       let lexbuf = Lexing.from_string "Monday(11:15-12:45),  WED(11:15-12:45), FRIDAY(11:15-12:45)" in
         Ttparser.slots Lexer.scan lexbuf
-    in print_string (string_of_slots slots)
+    in print_string ((string_of_slots slots) ^ "\n")
   with End_of_file -> exit 0
  
 let test_dateparser () =

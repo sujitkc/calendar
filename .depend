@@ -1,0 +1,27 @@
+calendar.cmo: calendar.cmi
+calendar.cmx: calendar.cmi
+lecture.cmo: calendar.cmi lecture.cmi
+lecture.cmx: calendar.cmx lecture.cmi
+lexer.cmo: ttparser.cmi
+lexer.cmx: ttparser.cmx
+test_dateparser.cmo: ttparser.cmi lexer.cmo lecture.cmi
+test_dateparser.cmx: ttparser.cmx lexer.cmx lecture.cmx
+test_timetable.cmo: timetable_impl.cmi timetable.cmi lecture.cmi calendar.cmi
+test_timetable.cmx: timetable_impl.cmx timetable.cmx lecture.cmx calendar.cmx
+test_ttparser.cmo: ttparser.cmi timetable.cmi lexer.cmo lecture.cmi \
+    calendar.cmi
+test_ttparser.cmx: ttparser.cmx timetable.cmx lexer.cmx lecture.cmx \
+    calendar.cmx
+timetable_impl.cmo: ttparser.cmi timetable.cmi lexer.cmo lecture.cmi \
+    timetable_impl.cmi
+timetable_impl.cmx: ttparser.cmx timetable.cmx lexer.cmx lecture.cmx \
+    timetable_impl.cmi
+timetable.cmo: calendar.cmi timetable.cmi
+timetable.cmx: calendar.cmx timetable.cmi
+ttparser.cmo: timetable.cmi lecture.cmi calendar.cmi ttparser.cmi
+ttparser.cmx: timetable.cmx lecture.cmx calendar.cmx ttparser.cmi
+calendar.cmi:
+lecture.cmi: calendar.cmi
+timetable_impl.cmi: timetable.cmi lecture.cmi calendar.cmi
+timetable.cmi: calendar.cmi
+ttparser.cmi: timetable.cmi lecture.cmi

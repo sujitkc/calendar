@@ -10,6 +10,9 @@
 (*
 The calendarday type may be either a single holiday or a vacation having a range of contiguous dates.
 *)
+
+(* #use "calendar.ml" *)
+
 type calendarday =
     Working  of Calendar.date
   | Holiday  of Calendar.date * string
@@ -155,7 +158,13 @@ let getLectureDatesWithoutHolidayList sem lec hlist =
 
 
         
-
+(*
+[Date: 03 Jan. 2017]
+To generate lecture plan:
+On the OCaml top-level ...
+#load "Calendar.cmo";;
+# use "lecture.ml";;
+*)
 
 (* TEST CASES *)
 (*
@@ -183,6 +192,41 @@ let holidayList2015IIITB = [
   Vacation(Calendar.Date(18, Calendar.October, 2015), Calendar.Date(25, Calendar.October, 2015), "Spring Mid-term Break");
 ]
 
+let autumn2016IIITB = { semStartDate = Calendar.Date(2, Calendar.August, 2016) ; semEndDate = Calendar.Date(5, Calendar.December, 2016)}
+
+let holidayList2016IIITB = [
+  Holiday(Calendar.Date(15, Calendar.January, 2016  ), "Makara Sankranti"   );
+  Holiday(Calendar.Date(26, Calendar.January, 2016  ), "Republic Day"       );
+  Holiday(Calendar.Date(7,  Calendar.March, 2016    ), "Maha Shivarathri"   );
+  Holiday(Calendar.Date(25, Calendar.March, 2016    ), "Good Friday"        );
+  Holiday(Calendar.Date(8,  Calendar.April, 2016    ), "Ugadi"              );
+  Holiday(Calendar.Date(6,  Calendar.July, 2016     ), "Ramzan"             );
+  Holiday(Calendar.Date(15, Calendar.August, 2016   ), "Independence day"   );
+  Holiday(Calendar.Date(5,  Calendar.September, 2016), "Ganesh Chaturthi"   );
+  Holiday(Calendar.Date(10, Calendar.October, 2016  ), "Ayudhapuja"         );
+  Holiday(Calendar.Date(11, Calendar.October, 2016  ), "Vijaya Dashami"     );
+  Holiday(Calendar.Date(31, Calendar.October, 2016  ), "Balipadyami"        );
+  Holiday(Calendar.Date(1,  Calendar.November, 2016 ), "Kannada Rajyothsava");
+]
+
+let spring2017IIITB = { semStartDate = Calendar.Date(2, Calendar.January, 2017) ; semEndDate = Calendar.Date(30, Calendar.April, 2017)}
+
+let holidayList2017IIITB = [
+  Holiday(Calendar.Date(26, Calendar.January, 2017  ), "Republic Day"       );
+  Holiday(Calendar.Date(14,  Calendar.February, 2017    ), "Maha Shivarathri"   );
+  Holiday(Calendar.Date(14, Calendar.April, 2017    ), "Good Friday"        );
+  Holiday(Calendar.Date(26,  Calendar.June, 2017     ), "Ramzan"             );
+  Holiday(Calendar.Date(15, Calendar.August, 2017   ), "Independence day"   );
+  Holiday(Calendar.Date(25,  Calendar.August, 2017), "Ganesh Chaturthi"   );
+  Holiday(Calendar.Date(29, Calendar.September, 2017  ), "Durga Puja/Mahanavami"         );
+  Holiday(Calendar.Date(2, Calendar.October, 2017  ), "Gandhi Jayanti"         );
+  Holiday(Calendar.Date(19, Calendar.October, 2017  ), "Diwali"        );
+  Holiday(Calendar.Date(20, Calendar.October, 2017  ), "Balipadyami"        );
+  Holiday(Calendar.Date(1,  Calendar.November, 2017 ), "Kannada Rajyothsava");
+  Holiday(Calendar.Date(1,  Calendar.November, 2017 ), "Christmas");
+]
+
+
 (*
 let pl2014 = (getLectureDates spring2014IIITB [Calendar.Monday; Calendar.Friday])
 let py2014 = (getLectureDates autumn2014IIITB [Calendar.Monday; Calendar.Wednesday])
@@ -191,22 +235,25 @@ let st2015 =
 
 let sriganesh_spr_2015 =
     (getLectureDatesWithoutHolidayList spring2015IIITB [Calendar.Tuesday] holidayList2015IIITB) (* PE with Sriganesh and Rishab, Spring 2015 *)
-*) 
 let sriganesh_aut_2015 =
     (getLectureDatesWithoutHolidayList autumn2015IIITB [Calendar.Tuesday] holidayList2015IIITB) (* PE with Sriganesh and Rishab, Spring 2015 *)
 
 let py2015 = (getLectureDatesWithoutHolidayList autumn2015IIITB [Calendar.Thursday; Calendar.Friday] holidayList2015IIITB)
 let java_aut_2015 = (getLectureDatesWithoutHolidayList autumn2015IIITB [Calendar.Monday; Calendar.Tuesday] holidayList2015IIITB)
-
-let test () =
+let py2016 = (getLectureDatesWithoutHolidayList autumn2016IIITB [Calendar.Monday; Calendar.Tuesday; Calendar.Friday] holidayList2016IIITB)
+let compiler2016 = (getLectureDatesWithoutHolidayList autumn2016IIITB [Calendar.Thursday; Calendar.Friday] holidayList2016IIITB)
+let compiler_samsung_2016 = (getLectureDatesWithoutHolidayList autumn2016IIITB [Calendar.Saturday] holidayList2016IIITB)
+*) 
+let pl_2017 = (getLectureDatesWithoutHolidayList spring2017IIITB [Calendar.Tuesday; Calendar.Wednesday] holidayList2017IIITB)
 (*
+let test () =
   printDateList l1; print_string "\n\n";
   printDateList l2; print_string "\n\n";
   printCalendardayWeekdayList st2015; print_string "\n\n";
   printDateWeekdayList sriganesh2015; print_string "\n\n"
-*)
   printDateWeekdayList py2015; print_string "\n\n";
   printDateWeekdayList sriganesh_aut_2015; print_string "\n\n";
   printDateWeekdayList java_aut_2015; print_string "\n\n"
+*)
 
 (* let _ = test() *)

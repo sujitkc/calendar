@@ -10,3 +10,14 @@ make
 
 Running the lecture example program
 ./lecture
+
+Date: 19 August 2016
+---------------------
+Method for Ad-hoc Lecture Plan Generation
+-----------------------------------------
+- If calendar.cmo doesn't exist, compile calendar.ml
+  ocamlc -c calendar.ml
+- Open REPL
+- #load "calendar.cmo";;
+- #use "lecture.ml";;
+- 

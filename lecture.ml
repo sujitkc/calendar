@@ -11,8 +11,9 @@
 The calendarday type may be either a single holiday or a vacation having a range of contiguous dates.
 *)
 
-(* #use "calendar.ml" *)
-
+(*
+#use "calendar.ml" (* to be used only when working on the top-level. *)
+*)
 type calendarday =
     Working  of Calendar.date
   | Holiday  of Calendar.date * string
@@ -171,7 +172,6 @@ On the OCaml top-level ...
 let spring2014IIITB = { semStartDate = Calendar.Date(2, Calendar.January, 2014); semEndDate = Calendar.Date(30, Calendar.May, 2014)}
 let autumn2014IIITB = { semStartDate = Calendar.Date(4, Calendar.August, 2014) ; semEndDate = Calendar.Date(13, Calendar.December, 2014)}
 let spring2015IIITB = { semStartDate = Calendar.Date(1, Calendar.January, 2015); semEndDate = Calendar.Date(3, Calendar.May, 2015)}
-*)
 let autumn2015IIITB = { semStartDate = Calendar.Date(3, Calendar.August, 2015) ; semEndDate = Calendar.Date(6, Calendar.December, 2015)}
 
 let holidayList2015IIITB = [
@@ -227,6 +227,8 @@ let holidayList2017IIITB = [
 ]
 
 
+*)
+
 (*
 let pl2014 = (getLectureDates spring2014IIITB [Calendar.Monday; Calendar.Friday])
 let py2014 = (getLectureDates autumn2014IIITB [Calendar.Monday; Calendar.Wednesday])
@@ -244,7 +246,6 @@ let py2016 = (getLectureDatesWithoutHolidayList autumn2016IIITB [Calendar.Monday
 let compiler2016 = (getLectureDatesWithoutHolidayList autumn2016IIITB [Calendar.Thursday; Calendar.Friday] holidayList2016IIITB)
 let compiler_samsung_2016 = (getLectureDatesWithoutHolidayList autumn2016IIITB [Calendar.Saturday] holidayList2016IIITB)
 *) 
-let pl_2017 = (getLectureDatesWithoutHolidayList spring2017IIITB [Calendar.Tuesday; Calendar.Wednesday] holidayList2017IIITB)
 (*
 let test () =
   printDateList l1; print_string "\n\n";
@@ -254,6 +255,53 @@ let test () =
   printDateWeekdayList py2015; print_string "\n\n";
   printDateWeekdayList sriganesh_aut_2015; print_string "\n\n";
   printDateWeekdayList java_aut_2015; print_string "\n\n"
-*)
 
 (* let _ = test() *)
+
+let autumn2020IIITB = { semStartDate = Calendar.Date(4, Calendar.August, 2020) ; semEndDate = Calendar.Date(31, Calendar.December, 2020)}
+
+let holidayList2020IIITB = [
+  Holiday(Calendar.Date(15, Calendar.January, 2020  ), "Makara Sankranti"   );
+  Holiday(Calendar.Date(21,  Calendar.February, 2020    ), "Maha Shivarathri"   );
+  Holiday(Calendar.Date(25,  Calendar.March, 2020    ), "Ugadi"              );
+  Holiday(Calendar.Date(2,  Calendar.April, 2020    ), "Ramnavami"              );
+  Holiday(Calendar.Date(10,  Calendar.April, 2020     ), "Good Friday"             );
+  Holiday(Calendar.Date(1,  Calendar.May, 2020     ), "May Day"             );
+  Holiday(Calendar.Date(31,  Calendar.July, 2020     ), "Ramzan"             );
+  Holiday(Calendar.Date(11, Calendar.August, 2020   ), "Janmashthami"   );
+  Holiday(Calendar.Date(15, Calendar.August, 2020   ), "Independence Day"   );
+  Holiday(Calendar.Date(21, Calendar.August, 2020   ), "Gowri Habba"   );
+  Holiday(Calendar.Date(2, Calendar.October, 2020  ), "Gandhi Jayanti"         );
+  Holiday(Calendar.Date(13,  Calendar.November, 2020 ), "Dhanteras");
+  Holiday(Calendar.Date(25,  Calendar.December, 2020 ), "Christmas");
+]
+
+let pa4se_2020 = (getLectureDatesWithoutHolidayList autumn2020IIITB [Calendar.Tuesday; Calendar.Thursday] holidayList2020IIITB)
+*)
+let autumn2022IIITB = { semStartDate = Calendar.Date(1, Calendar.August, 2022) ; semEndDate = Calendar.Date(30, Calendar.November, 2022)}
+
+let holiday_list_2022_iiitb = [
+  Holiday(Calendar.Date(14, Calendar.January, 2022), "Makara Sankranti");
+  Holiday(Calendar.Date(26, Calendar.January, 2022), "Republic Day");
+  Holiday(Calendar.Date(1, Calendar.March, 2022), "Maha Shivaratri");
+  Holiday(Calendar.Date(14, Calendar.April, 2022), "Ambedkar Jayanthi");
+  Holiday(Calendar.Date(15, Calendar.April, 2022), "Good Friday");
+  Holiday(Calendar.Date(3, Calendar.May, 2022), "Ramzan");
+  Holiday(Calendar.Date(12, Calendar.August, 2022), "Varamahalakshmi");
+  Holiday(Calendar.Date(15, Calendar.August, 2022), "Independence Day");
+  Holiday(Calendar.Date(31, Calendar.August, 2022), "Ganesh Chaturthi");
+  Holiday(Calendar.Date(4, Calendar.October, 2022), "Ayudha Puja");
+  Holiday(Calendar.Date(5, Calendar.October, 2022), "Vijaya Dashami");
+  Holiday(Calendar.Date(24, Calendar.October, 2022), "Naraka Chaturdasi");
+  Holiday(Calendar.Date(26, Calendar.October, 2022), "Balipadyami");
+  Holiday(Calendar.Date(1, Calendar.November, 2022), "Kannada Rajyotsava");
+  Holiday(Calendar.Date(2, Calendar.April, 2022), "Ugadi");
+  Holiday(Calendar.Date(1, Calendar.May, 2022), "May Day");
+  Holiday(Calendar.Date(10, Calendar.July, 2022), "Bakrid");
+  Holiday(Calendar.Date(2, Calendar.October, 2022), "Gandhi Jayanti");
+  Holiday(Calendar.Date(25, Calendar.December, 2022), "Christmas");
+]
+
+let compilers_2022 = (getLectureDatesWithoutHolidayList autumn2022IIITB [Calendar.Tuesday; Calendar.Thursday] holiday_list_2022_iiitb)
+
+let _ = printDateWeekdayList compilers_2022

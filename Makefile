@@ -1,7 +1,6 @@
 OCAMLC=ocamlc
 OCAMLOPT = ocamlopt
-CSV=/usr/local/lib/ocaml/3.12.1/csv/
-
+CSV=/home/sujitkc/.opam/default/lib/csv
 timetable : lecture.cmx calendar.cmx timetable.cmx timetable_impl.cmx ttparser.cmx lexer.cmx
 	$(OCAMLOPT) -o timetable $(CSV)/csv.cmxa str.cmxa calendar.cmx lecture.cmx timetable.cmx ttparser.cmx lexer.cmx timetable_impl.cmx 
 
@@ -13,6 +12,18 @@ test_ttparser : lexer.cmx ttparser.cmx test_ttparser.cmx calendar.cmx timetable.
 
 test_dateparser : lexer.cmx ttparser.cmx test_dateparser.cmx calendar.cmx
 	$(OCAMLOPT) -o $@ calendar.cmx lecture.cmx lexer.cmx ttparser.cmx test_dateparser.cmx
+
+lecture : calendar.cmo lecture.cmo
+	$(OCAMLC) calendar.cmo lecture.cmo -o lecture
+
+calendar.cmo : calendar.cmi calendar.ml
+	$(OCAMLC) -c calendar.ml
+
+calendar.cmi :  calendar.mli
+	$(OCAMLC) -c calendar.mli
+
+lecture.cmo : calendar.cmi lecture.cmi lecture.ml
+	$(OCAMLC) -c lecture.ml
 
 depend:
 	ocamldep *.ml *.mli > .depend
